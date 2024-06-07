@@ -1,6 +1,5 @@
 <?php 
 
-require "database.php";
     /**
      * [Dados Formulário]
      * 1 - Pegar os valores dos inputs
@@ -9,6 +8,7 @@ require "database.php";
     if(count($_POST) > 0) {
 
         try {
+            include("database.php");
 
             $input = $_POST;
 
@@ -42,4 +42,4 @@ require "database.php";
     $conn = null;
 }   
 
-include 'pedido.php';
+include 'order.php';
