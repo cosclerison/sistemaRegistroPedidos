@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container mt-4">
-        <form id="meuFormulario" action="add_order.php" method="post">
+        <form id="meuFormulario" action="order_add.php" method="post">
             <h2>Escolher itens do Pedido</h2>
       
 
@@ -64,7 +64,7 @@
 
         </form>
     </div>
-    <?php include("list_order.php"); ?>
+    <?php include("order_list.php"); ?>
 
     <?php if(count($orders) > 0): ?>
         <div class="container">

@@ -27,7 +27,8 @@ include("database.php");
             
             $name               = $input['name'];
             $category           = $input['category'];
-            $price              = $input['price'];
+            $price           = str_replace('.', '', $input['price']);
+            $price           = str_replace(',', '.', $price);
             $image              = $input['image'];
             $info_additional    = $input['info_additional'];
             // $user_id            = $input['user_id'];
@@ -58,4 +59,4 @@ include("database.php");
         $conn = null;
     }   
 
-    include 'product.php';
+    header("location: product.php");

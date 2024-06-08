@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container mt-4">
-        <form id="meuFormulario" action="add_product.php" method="post">
+        <form id="meuFormulario" action="product_add.php" method="post">
             <h2>Cadastro de Produtos</h2>
 
             <div class="form-group">
@@ -76,7 +76,7 @@
         </form>
     </div>
     
-    <?php include("list_product.php"); ?>
+    <?php include("product_list.php"); ?>
 
     <?php if(count($products) > 0): ?>
         <div class="container">
@@ -103,12 +103,29 @@
                         <td><?= $product['image'] ?></td>
                         <td><?= $product['name'] ?></td>
                         <td><?= $product['category'] ?></td>
-                        <td><?= $product['price'] ?></td>
+                        <td>R$ <?= number_format($product['price'], 2, ",", ".") ?></td>
                         <td><?= $product['info_additional'] ?></td>
-                        <td><?= $product['created_at'] ?></td>
+                        <td><?php
+                                $createdAt = $product['created_at'];
+                                if (!($createdAt instanceof DateTime)) {
+                                    $createdAt = new DateTime($createdAt);
+                                }
+                                echo $createdAt->format('d-m-Y h:i');
+                            ?></td>
                         <td>
-                            <button type="button" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></button>
-                            <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
+                            <a 
+                                type="button" 
+                                class="btn btn-warning btn-sm" 
+                                onclick="return confirm('Remover ( <?= $product['name'] ?> ) ?');" 
+                                href='/product_update_form.php?id=<?= $product['id'] ?>'>
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a 
+                                class="btn btn-danger btn-sm" 
+                                onclick="return confirm('Remover ( <?= $product['name'] ?> ) ?');" 
+                                href='/product_delete.php?id=<?= $product['id'] ?>'>
+                                <i class="bi bi-trash3"></i>
+                            </a>
                         </td>
                         <?php endforeach; ?>
                     </tr>
@@ -125,6 +142,12 @@
     <?php endif; ?>
 
 </body>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#price').mask('000.000.000,00', {reverse: true});
+        });
+    </script>
 </html>

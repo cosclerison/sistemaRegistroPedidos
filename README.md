@@ -61,7 +61,13 @@
     4.1 - Criar a tabela de "produto" no banco de dados
         product (id, name, category, price, image, info_adicional, user_id, created_at)
     4.2 - Fazer o CRUD de "product"
-    4.3 - Criar a tela de inserção/visualização/remoção de produtos
-    4.4 - Criar a tela de atualização do produto
+    4.3 - Criar a tela 
+        [ OK ] Inserção
+        [ OK ] Visualização
+        [ OK ] Remoção de produtos
+
+    4.4 - Criar a tela de Edição/Atualização do produto
+    4.5 - Criar a botão de remover produto/pedido
+    4.6 - Refazer a tela de Pedidos
 
 
