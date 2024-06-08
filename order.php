@@ -8,115 +8,133 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    <div class="container mt-4">
-        <form id="meuFormulario" action="order_add.php" method="post">
-            <h2>Escolher itens do Pedido</h2>
-      
-
-            <div class="form-group">
-                <label for="name_product">Nome do Produto</label>
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="name_product"
-                    name="name_product" 
-                    placeholder="Digite o produto">
-            </div>
-            <div class="form-group">
-                <label for="qtd_product">Quantidade Produto</label>
-                <input 
-                    type="number" 
-                    class="form-control" 
-                    id="qtd_product" 
-                    name="qtd_product"
-                    min="0"
-                    max="10"
-                    placeholder="Digite a quantidade">
-            </div>
-            <div class="form-group">
-                <label for="obs_product">Observação</label>
-                <textarea 
-                name="obs_product" 
-                id="obs_product" 
-                name="obs_product" 
-                class="form-control" 
-                cols="5" 
-                rows="3">
-            </textarea>
-            <div class="form-group">
-                <label for="price_product">Preço</label>
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="price_product"
-                    name="price_product"
-                    placeholder="Digite o preço">
-            </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Adicionar Item</button>
-
-            <!-- Exibir mensagem de resultado -->
-            <?php if (isset($resultado)): ?>
-                <div class="alert <?= $resultado["style"] ?> mt-2">
-                    <?php echo htmlspecialchars($resultado['msg']); ?>
-                </div>
-            <?php endif; ?>
-
-        </form>
-    </div>
     <?php include("order_list.php"); ?>
 
-    <?php if(count($orders) > 0): ?>
-        <div class="container">
-            <dic class="col-12">
-                <h3>Lista de Pedidos Cadastrados...</h3>
-            </dic>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Quantidade</th>
-                    <th scope="col">Observações</th>
-                    <th scope="col">Preço</th>
-                    <th scope="row"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($orders as $order): ?>
-                    <tr>
-                        <th scope="row"><?= $order['id'] ?></th>
-                        <td><?= $order['name_product'] ?></td>
-                        <td><?= $order['qtd_product'] ?></td>
-                        <td><?= $order['obs_product'] ?></td>
-                        <td>R$ <?= number_format($order['price_product'], 2, ",", ".") ?></td>
-                        <td>
-                            <a 
-                                type="button" 
-                                class="btn btn-warning btn-sm" 
-                                onclick="return confirm('Editar ( <?= $order['name_product'] ?> ) ?');" 
-                                href='/order_update_form.php?id=<?= $order['id'] ?>'>
-                                <i class="bi bi-pencil"></i>
-                            </a>
-                            <a 
-                                class="btn btn-danger btn-sm" 
-                                onclick="return confirm('Remover ( <?= $order['name'] ?> ) ?');" 
-                                href='/order_delete.php?id=<?= $order['id'] ?>'>
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                        </td>
-                        <?php endforeach; ?>
-                    </tr>
-   
-                </tbody>
-            </table>
+    <?php if(isset($_SESSION['nome'])): ?>
+    
+        <div class="container mt-4">
+            <form id="meuFormulario" action="order_add.php" method="post">
+                <h4>Olá <?= $_SESSION['nome']; ?></h4>
+                <h2>Escolher itens do Pedido</h2>
+        
+
+                <div class="form-group">
+                    <label for="name_product">Nome do Produto</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="name_product"
+                        name="name_product" 
+                        placeholder="Digite o produto">
+                </div>
+                <div class="form-group">
+                    <label for="qtd_product">Quantidade Produto</label>
+                    <input 
+                        type="number" 
+                        class="form-control" 
+                        id="qtd_product" 
+                        name="qtd_product"
+                        min="0"
+                        max="10"
+                        placeholder="Digite a quantidade">
+                </div>
+                <div class="form-group">
+                    <label for="obs_product">Observação</label>
+                    <textarea 
+                    name="obs_product" 
+                    id="obs_product" 
+                    name="obs_product" 
+                    class="form-control" 
+                    cols="5" 
+                    rows="3">
+                </textarea>
+                <div class="form-group">
+                    <label for="price_product">Preço</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="price_product"
+                        name="price_product"
+                        placeholder="Digite o preço">
+                </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Adicionar Item</button>
+
+                <!-- Exibir mensagem de resultado -->
+                <?php if (isset($resultado)): ?>
+                    <div class="alert <?= $resultado["style"] ?> mt-2">
+                        <?php echo htmlspecialchars($resultado['msg']); ?>
+                    </div>
+                <?php endif; ?>
+
+            </form>
         </div>
+
+        <?php include("order_list.php"); ?>
+
+        <?php if(count($orders) > 0): ?>
+            <div class="container">
+                <dic class="col-12">
+                    <h3>Lista de Pedidos Cadastrados...</h3>
+                </dic>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col">Observações</th>
+                        <th scope="col">Preço</th>
+                        <th scope="row"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($orders as $order): ?>
+                        <tr>
+                            <th scope="row"><?= $order['id'] ?></th>
+                            <td><?= $order['name_product'] ?></td>
+                            <td><?= $order['qtd_product'] ?></td>
+                            <td><?= $order['obs_product'] ?></td>
+                            <td>R$ <?= number_format($order['price_product'], 2, ",", ".") ?></td>
+                            <td>
+                                <a 
+                                    type="button" 
+                                    class="btn btn-warning btn-sm" 
+                                    onclick="return confirm('Editar ( <?= $order['name_product'] ?> ) ?');" 
+                                    href='/order_update_form.php?id=<?= $order['id'] ?>'>
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a 
+                                    class="btn btn-danger btn-sm" 
+                                    onclick="return confirm('Remover ( <?= $order['name'] ?> ) ?');" 
+                                    href='/order_delete.php?id=<?= $order['id'] ?>'>
+                                    <i class="bi bi-trash3"></i>
+                                </a>
+                            </td>
+                            <?php endforeach; ?>
+                        </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            <div class="row container mt-4">
+                <dic class="col-12">
+                    <h3>Nenhum produto cadastrado...</h3>
+                </dic>
+            </div>
+        <?php endif; ?>
     <?php else: ?>
-        <div class="row container-fluid mt-4">
-            <dic class="col-12">
-                <h3>Nenhum produto cadastrado...</h3>
-            </dic>
+        <div class="row container mt-4">
+    <div class="col">
+        <div class="alert alert-danger d-flex justify-content-between align-items-center" role="alert">
+            <span>Efetue o <strong>login</strong> para continuar!</span>
+            <a type="button" class="btn btn-warning btn-sm" href='/index.php'>
+                <i class="bi bi-door-open"></i> Acessar
+            </a>
         </div>
+    </div>
+</div>
     <?php endif; ?>
 </body>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -1,15 +1,18 @@
 <?php 
 
-include("database.php");
 
-/**
- * [Dados Formulário]
- * 1 - Pegar os valores dos inputs
- */
+    include("database.php");
+
+    /**
+     * [Dados Formulário]
+     * 1 - Pegar os valores dos inputs
+     */
+
+ 
     $where_id = "";
 
     if(isset($_GET['id'])) {
-
+        
         $id = $_GET['id'];
         $where_id = "AND id = $id";
     }

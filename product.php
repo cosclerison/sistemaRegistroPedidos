@@ -76,7 +76,7 @@
     
     <?php include("product_list.php"); ?>
 
-    <?php if(count($products) > 0): ?>
+    <?php if($products > 0): ?>
         <div class="container">
             <dic class="col-12">
                 <h3>Lista de Produtos Cadastrados...</h3>

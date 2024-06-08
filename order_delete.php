@@ -13,12 +13,13 @@ include("database.php");
             $input = $_GET;
 
             $id  = $input['id'];
+            $user_id = $_SESSION['id'];
             
             // Preparar a consulta
-            $update = "UPDATE torder_item SET deleted_at = NOW() WHERE id = ?";
+            $update = "UPDATE torder_item SET deleted_at = NOW() AND user_id = ? WHERE id = ?";
             $stmt = $conn->prepare($update);
 
-            $stmt->execute([$id]);
+            $stmt->execute([$user_id, $id]);
             
             $resultado["msg"]   = "Item removido com sucesso!";
             $resultado["cod"]   = 1;

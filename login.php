@@ -4,13 +4,16 @@
      * 1 - Pegar os valores dos inputs
      */
 
-     require "../sistemaRegistroPedidos/database.php";
 
+    
     if(count($_POST) > 0) {
         $email = $_POST["email"];
         $senha = $_POST["password"];
-
+        
         try {
+            
+            include("database.php");
+            
             /*
             * [Banco de dados]
             * 3 - Verificar se E-Mail e senha estão registrados
@@ -33,8 +36,16 @@
             $resultado = array();
 
             if ($qtd_user == 1) {
+                $_SESSION['id'] = $result[0]['id'];
+                $_SESSION['nome'] = $result[0]['name'];
+                $_SESSION['email'] = $result[0]['email'];
+
+                $result['auth'] = $_SESSION;
+
                 $resultado["msg"] = "Usuário encontrado!";
                 $resultado["cod"] = 1;
+
+                header("location: order.php");
             } elseif ($qtd_user == 0) {
                 $resultado["msg"] = "Usuário não encontrado!";
                 $resultado["cod"] = 0;

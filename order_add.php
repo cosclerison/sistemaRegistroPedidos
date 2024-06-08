@@ -8,24 +8,27 @@
     if(count($_POST) > 0) {
 
         try {
-            include("database.php");
 
+            include("database.php");
+            
             $input = $_POST;
 
             $name_product  = $input['name_product'];
             $qtd_product   = $input['qtd_product'];
             $obs_product   = $input['obs_product'];
-            $price_product = str_replace('.', '', $input['price']);
+            $price_product = str_replace('.', '', $input['price_product']);
             $price_product = str_replace(',', '.', $price_product);
-
+            $user_id       = $_SESSION['id'];
+            
             $sql = "INSERT INTO torder_item (
-                name_product,
-                qtd_product,
-                obs_product,
-                price_product) VALUE (?,?,?,?)";
+                                name_product,
+                                qtd_product,
+                                obs_product,
+                                price_product,
+                                user_id) VALUE (?,?,?,?,?)";
 
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$name_product, $qtd_product, $obs_product, $price_product]);
+            $stmt->execute([$name_product, $qtd_product, $obs_product, $price_product, $user_id]);
 
             $resultado["msg"]   = "Item inserido com sucesso!";
             $resultado["cod"]   = 1;

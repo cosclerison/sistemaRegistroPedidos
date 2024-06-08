@@ -68,6 +68,12 @@
 
     4.4 - Criar a tela de Edição/Atualização do produto
     4.5 - Criar a botão de remover produto/pedido
-    4.6 - Refazer a tela de Pedidos
+    
+## TODO
+1 - Resolver todos TODO's anteriores
+2 - Refazer a parte do cadastro de pedidos
+3 - Refatorar projeto
+3.1 - Criar classes invés de diversos arquivos com uma funcionalidade
+
 
 

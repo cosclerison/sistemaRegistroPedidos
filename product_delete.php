@@ -12,13 +12,14 @@ include("database.php");
         try {
             
             $input = $_GET;
-
-            $id  = $input['id'];
             
-            $update = "UPDATE tproduct SET deleted_at = NOW() WHERE id = ?";
+            $id  = $input['id'];
+            $user_id = $_SESSION['id'];
+            
+            $update = "UPDATE tproduct SET deleted_at = NOW(), user_id = ? WHERE id = ?";
             $stmt = $conn->prepare($update);
-
-            $stmt->execute([$id]);
+            
+            $stmt->execute([$user_id, $id]);
             
             $resultado["msg"]   = "Item removido com sucesso!";
             $resultado["cod"]   = 1;

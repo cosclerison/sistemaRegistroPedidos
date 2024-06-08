@@ -20,17 +20,19 @@ include("database.php");
             $price           = str_replace(',', '.', $price);
             $image           = $input['image'];
             $info_additional = $input['info_additional'];
+            $user_id         = $_SESSION['id'];
             
             $update = "UPDATE tproduct SET 
                         name            = ?, 
                         category        = ?, 
                         price           = ?, 
                         image           = ?, 
-                        info_additional = ?
+                        info_additional = ?,
+                        user_id         = ?
                         WHERE id        = ?";
 
             $stmt = $conn->prepare($update);
-            $stmt->execute([$name, $category, $price, $image, $info_additional, $id]);
+            $stmt->execute([$name, $category, $price, $image, $info_additional, $user_id, $id]);
 
             $resultado["msg"]   = "Item atualizado com sucesso!";
             $resultado["cod"]   = 1;

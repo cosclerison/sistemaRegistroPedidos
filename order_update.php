@@ -18,16 +18,18 @@ include("database.php");
             $obs_product   = $input['obs_product'];
             $price_product = str_replace('.', '', $input['price_product']);
             $price_product = str_replace(',', '.', $price_product);
-
+            $user_id       = $_SESSION['id'];
+            
             $update = "UPDATE torder_item SET 
                                 name_product  = ?, 
                                 qtd_product   = ?, 
                                 obs_product   = ?, 
-                                price_product = ?
+                                price_product = ?,
+                                user_id       = ?
                                 WHERE id      = ?";
 
             $stmt = $conn->prepare($update);
-            $stmt->execute([$name_product, $qtd_product, $obs_product, $price_product, $id]);
+            $stmt->execute([$name_product, $qtd_product, $obs_product, $price_product, $user_id, $id]);
 
             $resultado["msg"]   = "Item atualizado com sucesso!";
             $resultado["cod"]   = 1;
