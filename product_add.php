@@ -1,26 +1,14 @@
 <?php 
 
-include("database.php");
-
 /**
  * [Dados Formulário]
  * 1 - Pegar os valores dos inputs
  */
 
-     // Preparar a consulta
-     $stmt = $conn->prepare("SELECT * FROM tproduct WHERE deleted_at IS NULL");
-     // Vincular os parâmetros
-     // $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-     // $stmt->bindParam(":password", $senha, PDO::PARAM_STR);
-     // Executar a consulta
-     $stmt->execute();
- 
-     // Buscar todos os resultados
-     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
- 
-     // var_dump($products);
-
     if(count($_POST) > 0) {
+
+        include("database.php");
+
         try {
 
             $input = $_POST;

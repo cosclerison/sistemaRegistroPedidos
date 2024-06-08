@@ -15,8 +15,7 @@
             $name_product  = $input['name_product'];
             $qtd_product   = $input['qtd_product'];
             $obs_product   = $input['obs_product'];
-            $price_product = $input['price_product'];
-
+            $price_product = str_replace('.', '', $input['price']);
             $price_product = str_replace(',', '.', $price_product);
 
             $sql = "INSERT INTO torder_item (
@@ -42,4 +41,4 @@
     $conn = null;
 }   
 
-include 'order.php';
+header("location: order.php");

@@ -89,10 +89,21 @@
                         <td><?= $order['name_product'] ?></td>
                         <td><?= $order['qtd_product'] ?></td>
                         <td><?= $order['obs_product'] ?></td>
-                        <td><?= $order['price_product'] ?></td>
+                        <td>R$ <?= number_format($order['price_product'], 2, ",", ".") ?></td>
                         <td>
-                            <button type="button" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></button>
-                            <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
+                            <a 
+                                type="button" 
+                                class="btn btn-warning btn-sm" 
+                                onclick="return confirm('Editar ( <?= $order['name_product'] ?> ) ?');" 
+                                href='/order_update_form.php?id=<?= $order['id'] ?>'>
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a 
+                                class="btn btn-danger btn-sm" 
+                                onclick="return confirm('Remover ( <?= $order['name'] ?> ) ?');" 
+                                href='/order_delete.php?id=<?= $order['id'] ?>'>
+                                <i class="bi bi-trash3"></i>
+                            </a>
                         </td>
                         <?php endforeach; ?>
                     </tr>
@@ -108,6 +119,12 @@
         </div>
     <?php endif; ?>
 </body>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#price_product').mask('000.000.000,00', {reverse: true});
+        });
+    </script>
 </html>

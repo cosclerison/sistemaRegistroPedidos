@@ -12,73 +12,63 @@
 
     <?php if(isset($_GET['id']) && $_GET['id'] > 0): ?>
 
-        <?php include("product_list.php"); ?>
+        <?php include("order_list.php"); ?>
 
-        <form id="meuFormulario" action="product_update.php" method="post">
-            <h2>Editar de Produtos</h2>
+        <form id="meuFormulario" action="order_update.php" method="post">
+            <h2>Editar itens do Pedido</h2>
 
             <div class="form-group">
                 <input 
                     type="text" 
                     class="form-control" 
                     id="id"
-                    value="<?= $products[0]['id'] ?>"
-                    name="id" 
+                    value="<?= $orders[0]['id'] ?>"
+                    name="id"
                     readonly>
             </div>
             <div class="form-group">
-                <label for="name">Nome do Produto</label>
+                <label for="name_product">Nome do Produto</label>
                 <input 
                     type="text" 
                     class="form-control" 
-                    id="name"
-                    value="<?= $products[0]['name'] ?>"
-                    name="name" 
+                    id="name_product"
+                    value="<?= $orders[0]['name_product'] ?>"
+                    name="name_product" 
                     placeholder="Digite o produto">
             </div>
             <div class="form-group">
-                <label for="category">Categoria</label>
+                <label for="qtd_product">Quantidade Produto</label>
                 <input 
-                    type="text" 
+                    type="number" 
                     class="form-control" 
-                    id="category" 
-                    value="<?= $products[0]['category'] ?>"
-                    name="category"
+                    id="qtd_product" 
+                    value="<?= $orders[0]['qtd_product'] ?>"
+                    name="qtd_product"
                     min="0"
                     max="10"
-                    placeholder="Digite a categoria">
+                    placeholder="Digite a quantidade">
             </div>
             <div class="form-group">
-                <label for="price">Preço</label>
+                <label for="obs_product">Observação</label>
+                <textarea 
+                name="obs_product" 
+                id="obs_product" 
+                name="obs_product" 
+                class="form-control" 
+                cols="5" 
+                rows="3"><?= $orders[0]['obs_product'] ?></textarea>
+            <div class="form-group">
+                <label for="price_product">Preço</label>
                 <input 
                     type="text" 
                     class="form-control" 
-                    id="price"
-                    value="<?= $products[0]['price'] ?>"
-                    name="price"
+                    id="price_product"
+                    value="<?= $orders[0]['price_product'] ?>"
+                    name="price_product"
                     placeholder="Digite o preço">
             </div>
-            <div class="form-group">
-                <label for="image">Imagem</label>
-                <input 
-                type="file" 
-                class="form-control" 
-                id="image"
-                value="<?= $products[0]['image'] ?>"
-                name="image">
             </div>
-            <div class="form-group">
-                <label for="info_additional">Informação Adicional</label>
-                <textarea 
-                name="info_additional" 
-                id="info_additional" 
-                name="info_additional" 
-                class="form-control" 
-                cols="5" 
-                rows="3"><?= $products[0]['info_additional'] ?></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Adicionar Item</button>
 
             <!-- Exibir mensagem de resultado -->
             <?php if (isset($resultado)): ?>
@@ -97,7 +87,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script>
         $(document).ready(function(){
-            $('#price').mask('000.000.000,00', {reverse: true});
+            $('#price_product').mask('000.000.000,00', {reverse: true});
         });
     </script>
 </html>

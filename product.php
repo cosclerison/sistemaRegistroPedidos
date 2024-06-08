@@ -50,8 +50,6 @@
                     id="image"
                     name="image">
             </div>
-
-
             <div class="form-group">
                 <label for="info_additional">Informação Adicional</label>
                 <textarea 

@@ -10,8 +10,8 @@ include("database.php");
     if(count($_POST) > 0) {
         
         try {
-            $input = $_POST;
 
+            $input = $_POST;
             
             $id              = $input['id'];
             $name            = $input['name'];
@@ -21,9 +21,6 @@ include("database.php");
             $image           = $input['image'];
             $info_additional = $input['info_additional'];
             
-            // var_dump($input, $price); exit;
-            
-            // Preparar a consulta
             $update = "UPDATE tproduct SET 
                         name            = ?, 
                         category        = ?, 
@@ -33,8 +30,6 @@ include("database.php");
                         WHERE id        = ?";
 
             $stmt = $conn->prepare($update);
-
-            // Executar a consulta com os parâmetros na mesma sequencia declarada na variável $update
             $stmt->execute([$name, $category, $price, $image, $info_additional, $id]);
 
             $resultado["msg"]   = "Item atualizado com sucesso!";
@@ -52,4 +47,3 @@ include("database.php");
     }   
 
     header("location: product.php");
-    // include 'product.php';

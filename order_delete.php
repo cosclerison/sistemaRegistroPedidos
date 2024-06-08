@@ -8,14 +8,14 @@ include("database.php");
  */
 
     if(count($_GET) > 0) {
-        
+
         try {
-            
             $input = $_GET;
 
             $id  = $input['id'];
             
-            $update = "UPDATE tproduct SET deleted_at = NOW() WHERE id = ?";
+            // Preparar a consulta
+            $update = "UPDATE torder_item SET deleted_at = NOW() WHERE id = ?";
             $stmt = $conn->prepare($update);
 
             $stmt->execute([$id]);
@@ -34,4 +34,4 @@ include("database.php");
         $conn = null;
     }   
 
-    header("location: product.php");
+    header("location: order.php");
