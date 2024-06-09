@@ -12,7 +12,11 @@
 
     <?php if(isset($_GET['id']) && $_GET['id'] > 0): ?>
 
-        <?php include("product_list.php"); ?>
+        <?php 
+            require_once("../sistemaRegistroPedidos/Product/Product.php");
+            $product = new Product();
+            $products = $product->read();
+        ?>
 
         <form id="meuFormulario" action="product_update.php" method="post">
             <h2>Editar de Produtos</h2>

@@ -74,6 +74,7 @@
 2 - Refazer a parte do cadastro de pedidos
 3 - Refatorar projeto
 3.1 - Criar classes invés de diversos arquivos com uma funcionalidade
+4 - Refazer a parte de cadastro de pedidos
 
 
 

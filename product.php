@@ -8,8 +8,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-<div class="container mt-4">
-        <form id="meuFormulario" action="product_add.php" method="post">
+
+    <?php 
+        require_once("Product/ProductController.php");
+        $productController = new ProductController();
+        
+        if(count($_POST) > 0 ) {
+            $resultado = $productController->create($_POST);
+        }
+    ?>
+
+    <div class="container mt-4">
+        <form id="meuFormulario" action="product.php" method="post">
             <h2>Cadastro de Produtos</h2>
 
             <div class="form-group">
@@ -74,7 +84,8 @@
         </form>
     </div>
     
-    <?php include("product_list.php"); ?>
+    
+    <?php $products = $productController->read(); ?>
 
     <?php if($products > 0): ?>
         <div class="container">
