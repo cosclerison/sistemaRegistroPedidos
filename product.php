@@ -92,7 +92,7 @@
             <dic class="col-12">
                 <h3>Lista de Produtos Cadastrados...</h3>
             </dic>
-            <table class="table table-striped">
+            <table id="tableProduct" class="table table-striped">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -107,7 +107,7 @@
                 </thead>
                 <tbody>
                     <?php foreach($products as $product): ?>
-                    <tr>
+                    <tr id="productRow<?= $product['id'] ?>">
                         <th scope="row"><?= $product['id'] ?></th>
                         <td><?= $product['image'] ?></td>
                         <td><?= $product['name'] ?></td>
@@ -125,15 +125,14 @@
                             <a 
                                 type="button" 
                                 class="btn btn-warning btn-sm" 
-                                onclick="return confirm('Remover ( <?= $product['name'] ?> ) ?');" 
                                 href='/product_update_form.php?id=<?= $product['id'] ?>'>
                                 <i class="bi bi-pencil"></i>
                             </a>
                             <a 
                                 class="btn btn-danger btn-sm" 
-                                onclick="return confirm('Remover ( <?= $product['name'] ?> ) ?');" 
-                                href='/product_delete.php?id=<?= $product['id'] ?>'>
+                                onclick="deleteProduct('<?= $product['name'] ?>', <?= $product['id'] ?>)">
                                 <i class="bi bi-trash3"></i>
+                                <!-- return confirm('Remover ( <?= $product['name'] ?> ) ?'); -->
                             </a>
                         </td>
                         <?php endforeach; ?>
@@ -158,5 +157,36 @@
         $(document).ready(function(){
             $('#price').mask('000.000.000,00', {reverse: true});
         });
-    </script>
+
+function deleteProduct(nameProduct, idProduct) {
+    if (confirm("Remover " + nameProduct + "?")) {
+        // Cria um objeto XMLHttpRequest
+        var ajax = new XMLHttpRequest();
+        ajax.responseType = "json"; // Define o tipo de resposta para JSON
+
+        // Inicializa a requisição
+        ajax.open("GET", "product_delete.php?id=" + idProduct);
+
+        // Define o ouvinte de eventos para readystatechange antes de enviar a requisição
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState === 4) { // A requisição está completa
+                if (ajax.status === 200) { // A requisição foi bem-sucedida
+                    // Atualiza a página após a exclusão
+                    alert("Produto " + nameProduct + " removido com sucesso!");
+                    var row = document.getElementById("productRow"+idProduct);
+                    row.parentNode.removeChild(row);
+                    // window.location.reload();
+                } else {
+                    console.error("Erro: " + ajax.status);
+                }
+            }
+        };
+
+        // Envia a requisição
+        ajax.send();
+    }
+}
+</script>
+
+
 </html>

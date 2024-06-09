@@ -83,6 +83,12 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <a 
+                type="button" 
+                class="btn btn-danger" 
+                href='product.php'>
+                Cancelar
+            </a>
 
             <!-- Exibir mensagem de resultado -->
             <?php if (isset($resultado)): ?>

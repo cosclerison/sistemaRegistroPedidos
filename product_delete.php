@@ -6,14 +6,23 @@
      */
 
     require_once("Product/Product.php");
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
-    if(isset($_GET) > 0) {
+    if(isset($_SESSION['id']) && $_SESSION['id'] > 0) {
+        if(isset($_GET) > 0) {
+            
+            $input = $_GET;
 
-        $input = $_GET;
+            $product = new Product();
+            $resultado = $product->delete($input);
 
-        $product = new Product();
-        $resultado = $product->delete($input);
-        
-        header("location: product.php");
-    }   
+            echo json_encode($resultado);
+            
+            header("location: product.php");
+        }
+    } else {
+        echo "Operação não permitida!!!";
+    }
 

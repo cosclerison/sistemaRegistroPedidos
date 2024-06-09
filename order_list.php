@@ -1,7 +1,7 @@
 <?php 
 
 
-    include("database.php");
+include("Config/database.php");
 
     /**
      * [Dados Formulário]

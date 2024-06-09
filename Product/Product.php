@@ -26,7 +26,7 @@ class Product {
     public function create($input)
     {
         try {
-            include("database.php");
+            include("Config/database.php");
             
             $this->getValueAll($input);
 
@@ -69,7 +69,7 @@ class Product {
 
     public function read($id = null) 
     {
-        include("database.php");
+        include("Config/database.php");
 
         $where_id = "";
 
@@ -99,7 +99,7 @@ class Product {
     {
         try {
 
-            include("database.php");
+            include("Config/database.php");
 
             $this->getValueAll($input);
 
@@ -139,7 +139,7 @@ class Product {
 
     public function delete($id_delete)
     {
-        include("database.php");
+        include("Config/database.php");
 
         try {
             $id = $id_delete['id'];
@@ -149,6 +149,7 @@ class Product {
             
             $resultado = $stmt->execute([$this->user_id, $id]);
             
+            $resultado = [];
             $resultado["msg"]   = "Item removido com sucesso!";
             $resultado["cod"]   = 1;
             $resultado["style"] = "alert alert-success";

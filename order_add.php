@@ -9,7 +9,7 @@
 
         try {
 
-            include("database.php");
+            include("Config/database.php");
             
             $input = $_POST;
 

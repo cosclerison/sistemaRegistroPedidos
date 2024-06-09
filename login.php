@@ -12,7 +12,7 @@
         
         try {
             
-            include("database.php");
+            include("Config/database.php");
             
             /*
             * [Banco de dados]
